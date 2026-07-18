@@ -1,0 +1,3 @@
+service,error_rate_pct,p95_latency_ms,saturation_pct,rollback_ready
+api,0.2,220,40,yes
+edge,2.5,300,55,yes
