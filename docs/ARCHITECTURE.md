@@ -4,11 +4,14 @@ Scores canary shifts by error rate, latency, saturation, and rollback readiness.
 
 ```mermaid
 flowchart LR
-    N0["sample_canary.csv"]
-    N1["canary_scorecard.py"]
-    N2["verdict"]
-    N3["Result for operator review"]
-    N0 --> N1 --> N2 --> N3
+    A["Canary errors, latency, saturation, rollback readiness"]
+    B["Check error rollback threshold first"]
+    C{"Rollback threshold crossed?"}
+    D["Recommend rollback"]
+    E["Otherwise pause on health or readiness checks, else advance"]
+    A --> B --> C
+    C -->|Yes| D
+    C -->|No| E
 ```
 
 ## Operational boundaries
