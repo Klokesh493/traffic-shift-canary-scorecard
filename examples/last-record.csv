@@ -1,0 +1,2 @@
+service,error_rate_pct,p95_latency_ms,saturation_pct,rollback_ready
+edge,2.5,300,55,yes
