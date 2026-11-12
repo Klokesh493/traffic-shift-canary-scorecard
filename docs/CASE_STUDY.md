@@ -2,7 +2,7 @@
 
 ## Business problem
 
-Scores canary shifts by error rate, latency, saturation, and rollback readiness.
+A traffic shift needs a consistent stop or advance decision when errors, latency, saturation, or rollback readiness change.
 
 ## Reproduce the workflow
 
