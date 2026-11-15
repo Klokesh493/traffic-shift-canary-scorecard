@@ -2,6 +2,8 @@
 
 A traffic shift needs a consistent stop or advance decision when errors, latency, saturation, or rollback readiness change.
 
+[Skills and verification](docs/ENGINEERING_NOTES.md)
+
 ## What I built
 
 I built a staged rollout scorecard that checks the error rate first for rollback, then checks latency, saturation, and rollback readiness before allowing a traffic increase.
@@ -54,6 +56,10 @@ make replay
 
 `make replay` checks the recorded cases and exits nonzero if the output changes.
 See the [developer guide](docs/DEVELOPMENT.md) for the pinned lint and security tools.
+
+## Telemetry validation
+
+Missing or invalid numeric metrics return pause. The gate rejects nonfinite latency or error samples and saturation outside 0–100 percent.
 
 ## Operating limits
 

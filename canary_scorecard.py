@@ -1,15 +1,21 @@
 import csv
+import math
 import sys
 
 
 def verdict(row):
-    if float(row["error_rate_pct"]) > 1.0:
+    try:
+        errors = float(row["error_rate_pct"])
+        latency = float(row["p95_latency_ms"])
+        saturation = int(row["saturation_pct"])
+    except (KeyError, TypeError, ValueError):
+        return "pause"
+    if (not math.isfinite(errors) or not math.isfinite(latency)
+            or not 0 <= errors <= 100 or latency < 0 or not 0 <= saturation <= 100):
+        return "pause"
+    if errors > 1:
         return "rollback"
-    if float(row["p95_latency_ms"]) > 500:
-        return "pause"
-    if int(row["saturation_pct"]) > 80:
-        return "pause"
-    if row["rollback_ready"].lower() != "yes":
+    if latency > 500 or saturation > 80 or (row.get("rollback_ready") or "").lower() != "yes":
         return "pause"
     return "advance"
 
